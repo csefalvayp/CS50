@@ -1,0 +1,37 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <math.h>
+
+//Mention getfloat
+float get_float_change_owed(void);
+
+//Convert to cents
+int main(void)
+{
+    float dollars = get_float_change_owed();
+    int cents = round(dollars * 100);
+//Cound quarters   
+    int q = round(cents / 25);
+    int qr = cents - round(cents / 25);
+//Cound dimes 
+    int d = round(qr / 10);
+    int dr = qr - round(qr / 10);
+//Cound nickels 
+    int n = round(dr / 5);
+//Count pennies
+    int p = dr - round(dr / 5);
+//Add partial results
+    int coins = q + d + n + p;
+    printf("%i\n", coins);
+}
+//Prompt user for change owed
+float get_float_change_owed(void)
+{
+    float n;
+    do
+    {
+        n = get_float("Change owed: ");
+    }
+    while (n < 0);
+    return n;
+}
